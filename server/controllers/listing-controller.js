@@ -10,3 +10,6 @@ module.exports = {
     }
   }
 }
+
+var message = 'hello team!';
+
