@@ -1,3 +1,4 @@
+var message = 'hello team!';
 module.exports = {
   listings: {
     dummyData: {username: 'anotherFeng', listing: 'computer mouse', description: 'want to get rid of this crappy computer mouse'},
