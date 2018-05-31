@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import Signup from './Signup.jsx';
 import {Button} from 'semantic-ui-react';
+
 // import Login from './Login.jsx';
 
 class NavBar extends React.Component{
@@ -9,9 +10,7 @@ class NavBar extends React.Component{
     super(props);
   }
 
-  createAccount(username){
-    console.log("to the server!", username);
-  }
+
 
   render(){
     return(
@@ -28,7 +27,7 @@ class NavBar extends React.Component{
             <Button.Group>
               <Button>Log in</Button>
               <Button.Or/>
-              <Signup create={this.createAccount.bind(this)}/> 
+              <Signup create={this.props.create.bind(this)}/> 
             </Button.Group>
           </div>
           <div className="item">
