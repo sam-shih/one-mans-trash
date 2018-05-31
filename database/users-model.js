@@ -5,7 +5,6 @@ let usersSchema = mongoose.Schema({
   username: String,
   password: String,
   created_at: Date,
-  listings: Array,
   gifted: Array,
   claimed: Array,
   karma: Number,
@@ -14,3 +13,5 @@ let usersSchema = mongoose.Schema({
 })
 
 let User = mongoose.model('User', usersSchema);
+
+
