@@ -3,6 +3,7 @@ mongoose.connect('');
 
 let listingsSchema = mongoose.Schema({
   _id: {type: Number, unique: true},
+  user_id: Number,
   isFreecycle: Boolean,
   isAvailable: Boolean,
   created_at: Date,
@@ -12,4 +13,18 @@ let listingsSchema = mongoose.Schema({
   photo: String
 });
 
-let Listing = mongoose.model("Listing", listingsSchema);
+let Listing = mongoose.model('Listing', listingsSchema);
+
+/*
+
+FUNCTIONS WE WILL NEED:
+
+Save : Saving listings into the database
+
+Claim : Marking listings as claimed
+
+Update : Updating listings
+
+AddInterest : Adding user to interested_users array for a listing
+
+*/
