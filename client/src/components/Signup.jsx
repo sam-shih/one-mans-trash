@@ -38,16 +38,14 @@ class Signup extends React.Component{
 
   submit(){
     if(this.state.account.password !== this.state.account.confirmedPw){
-      $('.signup-modal').transition('shake')
       console.log(`password don't match`);
     } else if(this.state.account.username.length < 4){
       console.log(`username must be atlease 4 characters long`);
-      $('.signup-modal').transition('shake')
     } else if(this.state.account.password.length <8){
       console.log(`password must be atlease 8 characters long`);
-      $('.signup-modal').transition('shake')
     } else {
       this.props.create(this.state.account);
+      this.close();
     }
   }
 
@@ -77,10 +75,8 @@ class Signup extends React.Component{
                 <Icon name='remove'/>Cancel
               </Button>
               <Button type="button" onClick={this.submit.bind(this)} color='blue' inverted type='submit'>Submit</Button>
-           
           </Form>
         </Modal.Content>
-
       </Modal>
     )
   }
