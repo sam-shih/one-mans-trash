@@ -31,8 +31,22 @@ let User = mongoose.model('User', usersSchema);
 
 module.export.User = User;
 
-let saveUser = (user) => {
-
+let saveUser = (userData) => {
+  var parsedUser = JSON.parse(userData.body);
+  var newUser = {};
+  newUser.username = parsedUser.username;
+  newUser.password = parsedUser.password;
+  newUser.created_at = parsedUser.created_at;
+  newUser.my_listings = [];
+  newUser.claimed = [];
+  newUser.karma = 0;
+  newUser.tokenCount = 0;
+  newUser.isAdmin = false;
+  var user = new User(newUser);
+  user.save((err) => {
+    if (err) return console.log(err)
+    console.log('new user created!', user);
+  });
 };
 
 let getUser = (credentials) => {
