@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 mongoose.connect('');
 
 let usersSchema = mongoose.Schema({
-  _id: {type: Number, unique: true},
   username: String,
   password: String,
   created_at: Date,
