@@ -13,7 +13,7 @@ let listingsSchema = mongoose.Schema({
 
 let Listing = mongoose.model('Listing', listingsSchema);
 
-model.export.Listing = Listing;
+module.exports.Listing = Listing;
 
 let usersSchema = mongoose.Schema({
   username: String,
@@ -29,7 +29,7 @@ let usersSchema = mongoose.Schema({
 
 let User = mongoose.model('User', usersSchema);
 
-module.export.User = User;
+module.exports.User = User;
 
 let saveUser = (userData) => {
   var parsedUser = JSON.parse(userData.body);
@@ -50,7 +50,7 @@ let saveUser = (userData) => {
 };
 
 let getUser = (credentials) => {
-
+  //User.find(function(err, credentials))
 }
 
 let saveListing = (listing) => {
@@ -74,3 +74,5 @@ let updateUser = () => {
 let updateListing = () => {
 
 };
+
+module.exports.saveUser = saveUser;
