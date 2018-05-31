@@ -50,11 +50,25 @@ let saveUser = (userData) => {
 };
 
 let getUser = (credentials) => {
-  //User.find(function(err, credentials))
+  //if there's a way to pass in the user's id we could simplify this by using mongoose findById
+  User.find(function(err, credentials))
 }
 
 let saveListing = (listing) => {
-
+  var parsedListing = JSON.parse(listing.body);
+  var newlisting = {};
+  newlisting.isFreecycle = parsedListing.isFreecycle;
+  newlisting.isAvailable = true;
+  newlisting.created_at = parsedListing.created_at;
+  newlisting.updated_at = parsedListing.created_at;
+  newlisting.interested_users = [];
+  newlisting.description = parsedListing.description;
+  newlisting.photo = parsedListing.photo;
+  var listing = new Listing(newlisting);
+  listing.save((err) => {
+    if (err) return console.log(err)
+    console.log('new listing created!', listing);
+  });
 };
 
 let claim = (listing) => {
