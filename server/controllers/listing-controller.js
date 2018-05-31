@@ -1,11 +1,22 @@
+const db = require('../../database/listings-model');
+
 module.exports = {
   listings: {
-    dummyData: {username: 'anotherFeng', listing: 'computer mouse', description: 'want to get rid of this crappy computer mouse'},
+    // get listing by most recent
+    get: function(req, res) {
+      db.Listing.find().sort({created_at: -1}).exec(function(err, listings) {
+        if (err) { console.error(err) }
+        console.log('Get request from server')
+        res.json(listings);
+      });
+    },
+    // create and add listing to db
     post: function(req, res) {
-      let params = [req.body.username, req.body.username, req.body.listing, req.body.description];
-      this.dummyData.post(params, function(err, results) {
+      new db.Listing.save(req.body).then(function(err, newListing) {
         if (err) { console.error(err); }
-        res.sendStatus(201);
+        console.log('Post request from server')
+        res.writeHead(201);
+        res.end(newListing);
       });
     }
   }
