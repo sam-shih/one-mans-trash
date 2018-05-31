@@ -1,7 +1,8 @@
 // const mongoose = require('mongoose');
-// mongoose.connect('');
+// mongoose.connect('mongodb://localhost/greenfield');
 
 // let listingsSchema = mongoose.Schema({
+//   user_id: Number,
 //   isFreecycle: Boolean,
 //   isAvailable: Boolean,
 //   created_at: Date,
@@ -12,3 +13,5 @@
 // });
 
 // let Listing = mongoose.model("Listing", listingsSchema);
+
+// model.export.Listing = Listing;
