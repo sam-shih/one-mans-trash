@@ -10,7 +10,18 @@ class NavBar extends React.Component{
     return(
       <div className="ui menu">
         <div className="item">
-          <div className="ui action left icon input"></div>
+          <div className="ui action left icon input">
+            <i class="search icon"></i>
+            <input type="type" placeholder="Search"/>
+            <button className="ui button">Submit</button>
+          </div>
+        </div>
+        <div className="right menu">
+          <div className="item ui"><a class="ui button">Log in</a></div>
+          <div className="item ui"><a class="ui button">Sign Up</a></div>
+          <div className="item">
+            <i class="bars icon"></i>
+          </div>        
         </div>
       </div>
     )
