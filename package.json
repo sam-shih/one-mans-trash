@@ -1,5 +1,5 @@
 {
-  "name": "react-redux-flashcard-app",
+  "name": "one-mans-trash-app",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -7,7 +7,7 @@
     "start": "nodemon server/app.js",
     "react-dev": "webpack -d --watch"
   },
-  "author": "anotherFeng",
+  "author": "AnotherMansTreasure",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -18,10 +18,12 @@
     "webpack-cli": "^2.1.4"
   },
   "dependencies": {
+    "bcrypt": "^2.0.1",
     "body-parser": "^1.18.3",
-    "express": "^4.16.3",
-    "jquery": "^3.3.1",
     "bootstrap": "^4.1.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "jquery": "^3.3.1",
     "mongoose": "^5.1.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
