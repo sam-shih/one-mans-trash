@@ -8,6 +8,11 @@ class NavBar extends React.Component{
   constructor(props){
     super(props);
   }
+
+  createAccount(username){
+    console.log("to the server!", username);
+  }
+
   render(){
     return(
       <div className="ui menu">
@@ -23,7 +28,7 @@ class NavBar extends React.Component{
             <Button.Group>
               <Button>Log in</Button>
               <Button.Or/>
-              <Signup/> 
+              <Signup create={this.createAccount.bind(this)}/> 
             </Button.Group>
           </div>
           <div className="item">
