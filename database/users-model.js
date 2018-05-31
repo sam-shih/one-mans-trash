@@ -1,11 +1,26 @@
 const mongoose = require('mongoose');
-mongoose.connect('');
+mongoose.connect('mongodb://localhost/greenfield');
+
+let listingsSchema = mongoose.Schema({
+  isFreecycle: Boolean,
+  isAvailable: Boolean,
+  created_at: Date,
+  updated_at: Date,
+  interested_users: Array,
+  description: String,
+  photo: String
+});
+
+let Listing = mongoose.model('Listing', listingsSchema);
+
+model.export.Listing = Listing;
 
 let usersSchema = mongoose.Schema({
   username: String,
   password: String,
   created_at: Date,
-  gifted: Array,
+  my_listings: [{type: Schema.Types.ObjectId, ref: 'Listing'}]
+  // gifted: Number, for any information regarding 'gifted listings' we can just going into the my_listings array and filter there.
   claimed: Array,
   karma: Number,
   tokenCount: Number,
@@ -14,4 +29,34 @@ let usersSchema = mongoose.Schema({
 
 let User = mongoose.model('User', usersSchema);
 
+module.export.User = User;
 
+let saveUser = (user) => {
+
+};
+
+let getUser = (credentials) => {
+
+}
+
+let saveListing = (listing) => {
+
+};
+
+let claim = (listing) => {
+  // will be a big method with following functionality:
+  // - Marks giver's User.my_listings[listing].isAvailable as False
+  // - Adds listing to taker's User.claimed array
+};
+
+let addInterest = (listing) => {
+
+};
+
+let updateUser = () => {
+
+};
+
+let updateListing = () => {
+
+};
