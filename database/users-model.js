@@ -16,8 +16,8 @@ let Listing = mongoose.model('Listing', listingsSchema);
 module.exports.Listing = Listing;
 
 let usersSchema = mongoose.Schema({
-  username: String,
-  password: String,
+  username: {type: String, required: true, index: {unique: true} },
+  password: {type: String, required: true},
   created_at: Date,
   my_listings: [{type: Schema.Types.ObjectId, ref: 'Listing'}]
   // gifted: Number, for any information regarding 'gifted listings' we can just going into the my_listings array and filter there.
