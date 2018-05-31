@@ -9,8 +9,8 @@ class NavBar extends React.Component{
     super(props);
   }
 
-  createAccount(){
-    console.log("test");
+  createAccount(username){
+    console.log("to the server!", username);
   }
 
   render(){
