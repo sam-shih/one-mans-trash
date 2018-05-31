@@ -15,16 +15,3 @@ let listingsSchema = mongoose.Schema({
 
 let Listing = mongoose.model('Listing', listingsSchema);
 
-/*
-
-FUNCTIONS WE WILL NEED:
-
-Save : Saving listings into the database
-
-Claim : Marking listings as claimed
-
-Update : Updating listings
-
-AddInterest : Adding user to interested_users array for a listing
-
-*/

@@ -15,19 +15,3 @@ let usersSchema = mongoose.Schema({
 let User = mongoose.model('User', usersSchema);
 
 
-/*
-
-FUNCTIONS WE WILL NEED:
-
-Save : Saving users into the database
-
-Update : Update user info
-
-AddToGifted : Add listing into the gifted array
-
-AddToClaimed : Add listing into the claimed array
-
-*/
-
-
-module.exports
