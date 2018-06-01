@@ -13,6 +13,7 @@ export function signup(user, callback){
 }
 
 export function login(user, callback){
+  console.log(user);
   $.post('/login', {
     userData: user
   })
