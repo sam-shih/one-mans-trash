@@ -51,7 +51,7 @@ let saveUser = (userData) => {
 
 let getUser = (credentials) => {
   //if there's a way to pass in the user's id we could simplify this by using mongoose findById
-  User.find(function(err, credentials))
+  User.findOne({username: credentials.username}, function(err, credentials))
 }
 
 let saveListing = (listing) => {
@@ -71,11 +71,33 @@ let saveListing = (listing) => {
   });
 };
 
-let claim = (listing) => {
+// let claim = () => {
+//   // will be a big method with following functionality:
+//   // - Marks giver's User.my_listings[listing].isAvailable as False
+//   // - Adds listing to taker's User.claimed array
+
+// };
+
+let give = (giver, claimant, listing) => {
+  // different from claim, will be for the listings with interest/trade requirement
   // will be a big method with following functionality:
   // - Marks giver's User.my_listings[listing].isAvailable as False
   // - Adds listing to taker's User.claimed array
-};
+  User.findOne({username: giver.username}, (err, user) => {
+    // NOTE: I'm not sure vvvv if listing.id is the right way to identify our correct listing.
+    // This will take some console logging to lock down, also depends on how server side bros
+    // are passing in info here.
+    user.my_listings[listing.id].isAvailable = false;
+    user.save();
+  })
+  User.findOne({username: claimant.username}, (err, user) => {
+    user.claimed.push(listing);
+    user.save();
+  })
+
+  // FUTURE FUNCTIONALITY:
+  // increment token or karma here?
+}
 
 let addInterest = (listing) => {
 
