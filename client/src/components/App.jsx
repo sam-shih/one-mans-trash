@@ -12,11 +12,21 @@ class App extends React.Component {
     }
   }
 
-  createAccount(username){
-    signup(username, (response)=>{
-      console.log(`this is from server ${response}`)
+  createAccount(user){
+    signup(user, (response)=>{
+      console.log(`this is from server ${response}`);
       this.setState({
-        loginAs: fetchUser.username
+        loginAs: response.username
+      })
+    })
+  }
+
+  userLogin(user){
+    console.log(login)
+    login(user, (response)=>{
+      console.log(`this is from server ${response} | login`);
+      this.setState({
+        loginAs: response.username
       })
     })
   }
@@ -24,7 +34,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-      <NavBar create={this.createAccount.bind(this)}/>
+      <NavBar 
+      create={this.createAccount.bind(this)}
+      login={this.userLogin.bind(this)}
+      />
       <div>Hello React</div>
       </div>
     )
