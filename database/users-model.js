@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/greenfield');
 
 let listingsSchema = mongoose.Schema({
+  name: String,
   isFreecycle: Boolean,
   isAvailable: Boolean,
   created_at: Date,
@@ -19,7 +20,7 @@ let usersSchema = mongoose.Schema({
   username: {type: String, required: true, index: {unique: true} },
   password: {type: String, required: true},
   created_at: Date,
-  my_listings: [{type: Schema.Types.ObjectId, ref: 'Listing'}]
+  my_listings: [{type: Schema.Types.ObjectId, ref: 'Listing'}],
   // gifted: Number, for any information regarding 'gifted listings' we can just going into the my_listings array and filter there.
   claimed: Array,
   karma: Number,
@@ -31,7 +32,7 @@ let User = mongoose.model('User', usersSchema);
 
 module.exports.User = User;
 
-let saveUser = (userData) => {
+let saveUser = (userData, callback) => {
   var parsedUser = JSON.parse(userData.body);
   var newUser = {};
   newUser.username = parsedUser.username;
@@ -43,20 +44,21 @@ let saveUser = (userData) => {
   newUser.tokenCount = 0;
   newUser.isAdmin = false;
   var user = new User(newUser);
-  user.save((err) => {
-    if (err) return console.log(err)
-    console.log('new user created!', user);
+  user.save().then(savedUser => {
+    callback(savedUser);
   });
 };
 
-let getUser = (credentials) => {
-  //if there's a way to pass in the user's id we could simplify this by using mongoose findById
-  User.findOne({username: credentials.username}, function(err, credentials))
+let loginUser = (username, password, callback) => {
+  User.findOne({username: username}, function(err, password) {
+    callback(password);
+  });
 }
 
-let saveListing = (listing) => {
+let saveListing = (listing, callback) => {
   var parsedListing = JSON.parse(listing.body);
   var newlisting = {};
+  newlisting.name = parsedListing.name;
   newlisting.isFreecycle = parsedListing.isFreecycle;
   newlisting.isAvailable = true;
   newlisting.created_at = parsedListing.created_at;
@@ -65,10 +67,9 @@ let saveListing = (listing) => {
   newlisting.description = parsedListing.description;
   newlisting.photo = parsedListing.photo;
   var listing = new Listing(newlisting);
-  listing.save((err) => {
-    if (err) return console.log(err)
-    console.log('new listing created!', listing);
-  });
+  listing.save().then(savedListing => {
+    callback(savedListing);
+  })
 };
 
 // let claim = () => {
@@ -87,7 +88,9 @@ let give = (giver, claimant, listing) => {
     // NOTE: I'm not sure vvvv if listing.id is the right way to identify our correct listing.
     // This will take some console logging to lock down, also depends on how server side bros
     // are passing in info here.
-    user.my_listings[listing.id].isAvailable = false;
+
+    //HELPDESK ABOUT OR RESEARCH HOW FOREIGN KEYS WORK AND HOW TO UPDATE.
+    user.my_listings[listing.name].isAvailable = false;
     user.save();
   })
   User.findOne({username: claimant.username}, (err, user) => {
@@ -99,8 +102,10 @@ let give = (giver, claimant, listing) => {
   // increment token or karma here?
 }
 
-let addInterest = (listing) => {
-
+let addInterest = (listing, user) => {
+  Listing.findOne({}, (err, listing) => {
+    listing.interested_users.push(user);
+  })
 };
 
 let updateUser = () => {
@@ -110,5 +115,9 @@ let updateUser = () => {
 let updateListing = () => {
 
 };
+
+let getListings = () => {
+
+}
 
 module.exports.saveUser = saveUser;
